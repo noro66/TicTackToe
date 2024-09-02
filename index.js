@@ -2,6 +2,7 @@
 const statusText = document.querySelector("#statusText");
 const restartBtn = document.querySelector("#restartBtn");
 const cellContainer = document.querySelector("#cellContainer");
+const resetScoreBtn = document.querySelector("#resetScoreBtn");
 
 // Create a 20x20 grid (400 cells)
 const gridSize = 20;
@@ -35,6 +36,7 @@ initializeGame();
 function initializeGame() {
     cells.forEach(cell => cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restartGame);
+    resetScoreBtn.addEventListener("click", resetScores);
     updateStatusText();
     running = true;
 }
@@ -144,4 +146,15 @@ function loadScores() {
     if (storedScores) {
         scores = JSON.parse(storedScores);
     }
+    updateStatusText(); // Update status text to reflect loaded scores
+}
+
+function resetScores() {
+    scores = {
+        X: 0,
+        O: 0
+    };
+    saveScores(); // Save reset scores to localStorage
+    updateStatusText(); // Update UI with reset scores
+    alert("Scores have been reset to 0-0!");
 }
