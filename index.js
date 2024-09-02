@@ -21,6 +21,13 @@ let options = new Array(gridSize * gridSize).fill("");
 // Game variables
 let currentPlayer = "X";
 let running = false;
+let scores = {
+    X: 0,
+    O: 0
+};
+
+// Load scores from localStorage
+loadScores();
 
 // Initialize the game
 initializeGame();
@@ -28,7 +35,7 @@ initializeGame();
 function initializeGame() {
     cells.forEach(cell => cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restartGame);
-    statusText.textContent = `${currentPlayer}'s turn`;
+    updateStatusText();
     running = true;
 }
 
@@ -50,7 +57,11 @@ function updateCell(cell, index) {
 
 function changePlayer() {
     currentPlayer = (currentPlayer === "X") ? "O" : "X";
-    statusText.textContent = `${currentPlayer}'s turn`;
+    updateStatusText();
+}
+
+function updateStatusText() {
+    statusText.textContent = `${currentPlayer}'s turn | X: ${scores.X} - O: ${scores.O}`;
 }
 
 // Function to check for a winner with 5 consecutive symbols
@@ -103,6 +114,9 @@ function checkWinner() {
     }
 
     if (roundWon) {
+        scores[currentPlayer]++;
+        saveScores();
+        updateStatusText();
         statusText.textContent = `${currentPlayer} wins!`;
         running = false;
     } else if (!options.includes("")) {
@@ -116,7 +130,18 @@ function checkWinner() {
 function restartGame() {
     currentPlayer = "X";
     options = new Array(gridSize * gridSize).fill("");
-    statusText.textContent = `${currentPlayer}'s turn`;
+    updateStatusText();
     cells.forEach(cell => cell.textContent = "");
     running = true;
+}
+
+function saveScores() {
+    localStorage.setItem("ticTacToeScores", JSON.stringify(scores));
+}
+
+function loadScores() {
+    const storedScores = localStorage.getItem("ticTacToeScores");
+    if (storedScores) {
+        scores = JSON.parse(storedScores);
+    }
 }
