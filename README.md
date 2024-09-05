@@ -19,7 +19,7 @@ To run this Tic-Tac-Toe game locally:
 
     bash
 
-git clone https://github.com/yourusername/tic-tac-toe.git
+git clone https://github.com/noro66/tic-tac-toe.git
 
 Navigate to the Project Directory
 
@@ -75,13 +75,3 @@ If you would like to contribute to this project, please follow these steps:
     Create a new branch for your feature or bug fix.
     Commit your changes with descriptive messages.
     Push to your branch and submit a pull request.
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-Acknowledgements
-
-    Font: "Permanent Marker" for game headings and status text.
-    Icons: Any icons used are from FontAwesome (if applicable).
-
-Feel free to adjust the sections as needed to better fit your project's specifics or any additional features you may have added.# TicTackToe
